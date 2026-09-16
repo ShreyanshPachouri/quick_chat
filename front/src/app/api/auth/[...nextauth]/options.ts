@@ -47,6 +47,7 @@ export const authOptions: AuthOptions = {
             }
 
             catch(error){
+                console.error("signIn callback failed:", error)
                 return false
             }
         },
