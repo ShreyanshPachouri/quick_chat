@@ -1,6 +1,6 @@
 "use client"
 
-import React, { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,9 +10,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "../ui/alert-dialog"
-import { Button } from '../ui/button'
+
 import { signOut } from "next-auth/react"
 
 const LogoutModal = ({open, setOpen}: { open: boolean, setOpen: Dispatch<SetStateAction<boolean>>}) => {
