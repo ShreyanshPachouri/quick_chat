@@ -37,7 +37,7 @@ export default function DeleteChatGroup({
         },
       });
       if (data?.message) {
-        clearCache("dashboard");
+        await clearCache("dashboard");
         toast.success(data?.message);
         setOpen(false);
         router.refresh();

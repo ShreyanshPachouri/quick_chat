@@ -63,7 +63,7 @@ export default function EditGroupChat({
       if (data?.message) {
         setOpen(false);
         toast.success(data?.message);
-        clearCache("dashboard");
+        await clearCache("dashboard");
         router.refresh();
       }
       setLoading(false);

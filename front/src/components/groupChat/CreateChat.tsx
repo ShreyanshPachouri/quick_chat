@@ -43,7 +43,7 @@ export default function CreateChat({ user }: { user: CustomUser }){
         })
 
         if(data?.message){
-            clearCache("dashboard")
+            await clearCache("dashboard")
             setLoading(false)
             setOpen(false)
             toast.success(data?.message)
