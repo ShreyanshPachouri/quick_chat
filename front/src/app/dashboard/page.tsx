@@ -7,6 +7,7 @@ export default async function dashboard(){
 
     return(
         <div>
+            <p>{JSON.stringify(session)}</p>
             <DashNav name={session?.user?.name ?? "User"} image={session?.user?.image ?? undefined}/>
         </div>
     )
