@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import {
@@ -33,6 +34,7 @@ export default function EditGroupChat({
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -62,6 +64,7 @@ export default function EditGroupChat({
         setOpen(false);
         toast.success(data?.message);
         clearCache("dashboard");
+        router.refresh();
       }
       setLoading(false);
     } catch (error) {
@@ -90,7 +93,7 @@ export default function EditGroupChat({
             <span className="text-red-400">{errors.passcode?.message}</span>
           </div>
           <div className="mt-4">
-            <Button className="w-full" disabled={loading}>
+            <Button type = "submit" className="w-full" disabled={loading}>
               {loading ? "Processing.." : "Submit"}
             </Button>
           </div>

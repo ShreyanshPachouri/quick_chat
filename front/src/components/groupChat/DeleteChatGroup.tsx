@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -26,6 +27,7 @@ export default function DeleteChatGroup({
   token: string;
 }) {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const deleteChatGroup = async () => {
     setLoading(true);
     try {
@@ -38,6 +40,7 @@ export default function DeleteChatGroup({
         clearCache("dashboard");
         toast.success(data?.message);
         setOpen(false);
+        router.refresh();
       }
       setLoading(false);
     } catch (error) {

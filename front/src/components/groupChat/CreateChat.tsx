@@ -18,10 +18,12 @@ import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import { CHAT_GROUP_URL } from "@/src/lib/apiEndPoints";
 import { clearCache } from "@/src/actions/common";
+import { useRouter } from "next/navigation";
 
 export default function CreateChat({ user }: { user: CustomUser }){
     const[open, setOpen] = useState(false)
     const[loading, setLoading] = useState(false)
+    const router = useRouter();
 
     const {
     register,
@@ -45,6 +47,7 @@ export default function CreateChat({ user }: { user: CustomUser }){
             setLoading(false)
             setOpen(false)
             toast.success(data?.message)
+            router.refresh()
         }
     }
 
