@@ -10,7 +10,7 @@ export default async function dashboard(){
         <div>
             <DashNav name={session?.user?.name ?? "User"} image={session?.user?.image ?? undefined}/>
             <div className="container">
-            <div className="flex justify-end mt-10"><CreateChat /></div>
+            <div className="flex justify-end mt-10"><CreateChat user = {session!.user!} /></div>
             </div>
         </div>
     )
