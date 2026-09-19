@@ -19,7 +19,7 @@ export default function ChatBase(){
     socket.on("message", handleMessage);
 
     return () => {
-        socket.close()
+        socket.off("message", handleMessage)
     };
 
 }, []);
