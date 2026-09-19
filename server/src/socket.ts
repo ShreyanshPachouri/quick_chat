@@ -6,7 +6,7 @@ interface CustomSocket extends Socket{
 
 export function setupSocket(io: Server){
     io.use((socket: CustomSocket, next) => {
-        const room = socket.handshake.auth.room
+        const room = socket.handshake.auth.room || socket.handshake.query.room as string
 
         if(!room){
             return next(new Error("Invalid room"))
