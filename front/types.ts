@@ -5,3 +5,10 @@ type ChatGroupType = {
     passcode: string,
     created_at: string
 }
+
+type GroupChatUserType = {
+    id: number,
+    name: string,
+    group_id: string,
+    created_at: string
+}
