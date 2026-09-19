@@ -26,16 +26,18 @@ export default function Chats({
     return socket.connect();
   }, []);
   useEffect(() => {
-    socket.on("message", (data: MessageType) => {
-      console.log("The message is", data);
-      setMessages((prevMessages) => [...prevMessages, data]);
-      scrollToBottom();
-    });
+  const handleMessage = (data: MessageType) => {
+    console.log("The message is", data);
+    setMessages((prevMessages) => [...prevMessages, data]);
+    scrollToBottom();
+  };
 
-    return () => {
-      socket.close();
-    };
-  }, []);
+  socket.on("message", handleMessage);
+
+  return () => {
+    socket.off("message", handleMessage);
+  };
+}, []);
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
