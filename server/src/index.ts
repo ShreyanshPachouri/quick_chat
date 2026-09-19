@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 7000;
 const server = createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://admin.socket.io"],
+    origin: ["http://localhost:3000", "https://admin.socket.io", "https://hoppscotch.io"],
     credentials: true
   },
 
