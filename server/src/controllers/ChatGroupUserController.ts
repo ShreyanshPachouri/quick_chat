@@ -28,11 +28,11 @@ class ChatGroupUserController{
         try{
             const body: GroupUserType = req.body
 
-            await prisma.groupUsers.create({
+           const user =  await prisma.groupUsers.create({
                 data: body
             })
 
-            return res.status(200).json({message: "User added successfully"})
+            return res.status(200).json({message: "User added successfully", data: user})
         }
 
         catch(error){
