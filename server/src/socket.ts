@@ -1,4 +1,5 @@
 import { Server, Socket } from "socket.io"
+import prisma from "./config/db.config.js"
 
 interface CustomSocket extends Socket{
     room?: string
@@ -20,9 +21,12 @@ export function setupSocket(io: Server){
         socket.join(socket.room!)
         console.log("Socket connected: ", socket.id)
 
-        socket.on("message", (data) => {
+        socket.on("message", async (data) => {
             console.log("Server side message", data)
-            io.to(socket.room!).emit("message", data)
+            await prisma.chats.create({
+                data: data
+            })
+            socket.to(socket.room!).emit("message", data)
         })
 
         socket.on("disconnect", () => {

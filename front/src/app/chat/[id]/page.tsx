@@ -1,4 +1,5 @@
 import ChatBase from '@/src/components/chat/ChatBase'
+import { fetchChats } from '@/src/fetch/chatsFetch'
 import { fetchChatGroup, fetchChatUsers } from '@/src/fetch/groupFetch'
 import { notFound } from 'next/navigation'
 
@@ -12,6 +13,7 @@ export default async function chat ({ params }: { params: { id: string }}){
 
     const group: ChatGroupType | null  = await fetchChatGroup(id)
     const users: Array<GroupChatUserType> | [] = await fetchChatUsers(id)
+    const chats: Array<MessageType> | [] = await fetchChats(id)
 
     if(group == null){
         return notFound()
@@ -19,7 +21,7 @@ export default async function chat ({ params }: { params: { id: string }}){
 
     return(
         <div>
-            <ChatBase group = {group} users = {users}/>
+            <ChatBase group = {group} users = {users} oldMessages = {chats}/>
         </div>
     )
 }

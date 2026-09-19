@@ -1,42 +1,32 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client"
 
-import { getSocket } from '@/src/lib/socket.config'
-import { useEffect, useMemo, useState } from 'react'
-import { v4 as uuidV4 } from "uuid"
 import ChatSidebar from './ChatSidebar'
 import ChatNav from './ChatNav'
 import ChatUserDialog from './ChatUserDialog'
+import Chats from './Chats'
+import { useEffect, useState } from 'react'
 
-export default function ChatBase({ group, users }: { group: ChatGroupType, users: Array<GroupChatUserType> | [] }){
-//     let socket = useMemo(() => {
-//         const socket = getSocket()
-//         socket.auth = {
-//             room: groupId
-//         }
+export default function ChatBase({ group, users, oldMessages }: { group: ChatGroupType, users: Array<GroupChatUserType> | [], oldMessages: Array<MessageType> | []}){
+const [open, setOpen] = useState(true)
+const [chatUser, setChatUser] = useState<GroupChatUserType>()
 
-//         return socket.connect()
-//     }, [])
+useEffect(() => {
+    const data = localStorage.getItem(group.id)
 
-//     useEffect(() => {
-//     const handleMessage = (data: any) => {
-//         console.log("The socket message is: ", data);
-//     };
-
-//     socket.on("message", handleMessage);
-
-//     return () => {
-//         socket.off("message", handleMessage)
-//     };
-
-// }, []);
-
-    const [open, setOpen] = useState(true)
+    if(data){
+        const pData = JSON.parse(data)
+        setChatUser(pData)
+    }
+}, [group.id])
 
     return(
         <div className = "flex">
             <ChatSidebar users = {users} />
             <div className = "w-full md:w-4/5 bg-gradient-to-b from-gray-50 to-white">
             {open ? <ChatUserDialog open = {open} setOpen = {setOpen} group = {group} /> : <ChatNav chatGroup = {group} users = {users}/>}
+
+            <Chats group = {group} chatUser = {chatUser} oldMessages = {oldMessages}/>
             </div>
         </div>
     )
