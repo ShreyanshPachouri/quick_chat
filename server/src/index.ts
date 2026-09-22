@@ -46,3 +46,4 @@ app.use('/api', Routes)
 connectKafkaProducer().catch((error) => console.log("Kafka error ", error))
 consumeMessages(process.env.KAFKA_TOPIC!).catch((err) => console.log("The consumer error is ", err))
 
+server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`))
