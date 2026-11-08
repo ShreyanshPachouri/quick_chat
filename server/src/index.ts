@@ -17,14 +17,14 @@ const PORT = process.env.PORT || 7000;
 const server = createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000", "https://admin.socket.io", "https://hoppscotch.io"],
+    origin: [process.env.FRONTEND_URL || "http://localhost:3000", "https://admin.socket.io", "https://hoppscotch.io"],
     credentials: true
   },
 
   adapter: createAdapter(redis)
 })
 
-instrument(io, {
+if (process.env.NODE_ENV !== "production") instrument(io, {
   auth: false,
   mode: "development"
 })
